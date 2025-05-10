@@ -1,0 +1,27 @@
+.convert {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.convert-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+.before-convert {
+    width: 40%;
+}
+
+#before-text {
+    width: 100%;
+    height: 500px;
+}
+
+.after-convert {
+    width: 40%;
+}
+
+#after-text {
+    width: 100%;
+    height: 500px;
+}
