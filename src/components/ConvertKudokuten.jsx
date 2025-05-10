@@ -4,14 +4,17 @@ import "./convertkudokuten.css";
 
 function ConvertKudokuten() {
   const [sentence, setSentence] = useState("");
-  const [convertedSentence, setConvertedSentence] = useState("");
+  const [convertedsentence, setConvertedSentence] = useState("");
 
   const convertKudokuten = () => {
     const fetch_convert = async () => {
-      const response = await axios.post("http://127.0.0.1:8000/zenkaku", sentence);
-      const converted = response.data;
+      const response = await axios.post("http://127.0.0.1:8000/zenkaku", {
+        text: sentence,
+      });
+      const converted = response.data.converted;
       setConvertedSentence(converted);
       console.log(converted);
+
     };
     fetch_convert();
   };
@@ -44,7 +47,7 @@ function ConvertKudokuten() {
             変換後
           </label>
           <br />
-          <textarea name="" id="after-text"></textarea>
+          <textarea name="" id="after-text" value={convertedsentence}></textarea>
         </div>
       </div>
     </main>
