@@ -1,21 +1,12 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter
 from pydantic import BaseModel
 
-app = FastAPI()  # インスタンスを作成
+router = APIRouter()  # インスタンス作成
 
 # CORS設定
 # origins = [
 #     "http://localhost:3000",
 # ]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 class Text(BaseModel):
@@ -23,7 +14,7 @@ class Text(BaseModel):
 
 
 # 文字列を全角に変換するエンドポイント
-@app.post("/zenkaku")
+@router.post("/zenkaku")
 async def convert_to_zenkaku(payload: Text):
     zenkaku_text = payload.text.replace(",", "、").replace(".", "。")
     zenkaku_text = zenkaku_text.replace("，", "、").replace("．", "。")
@@ -31,7 +22,7 @@ async def convert_to_zenkaku(payload: Text):
 
 
 # 文字列を半角に変換するエンドポイント
-@app.post("/hankaku")
+@router.post("/hankaku")
 async def convert_to_hankaku(payload: Text):
     hankaku_text = payload.text.replace("、", "，").replace("。", "．")
     return {"converted": hankaku_text}

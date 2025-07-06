@@ -14,7 +14,6 @@ function ConvertKudokuten() {
       const converted = response.data.converted;
       setConvertedSentence(converted);
       console.log(converted);
-
     };
     fetch_convert();
   };
@@ -47,7 +46,11 @@ function ConvertKudokuten() {
             変換後
           </label>
           <br />
-          <textarea name="" id="after-text" value={convertedsentence}></textarea>
+          <textarea
+            name=""
+            id="after-text"
+            value={convertedsentence}
+          ></textarea>
         </div>
       </div>
     </main>
