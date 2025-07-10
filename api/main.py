@@ -6,7 +6,7 @@ from convert.convert import router as convert_router
 
 app = FastAPI()  # インスタンスを作成
 
-# CORS設定
+# COR設定
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

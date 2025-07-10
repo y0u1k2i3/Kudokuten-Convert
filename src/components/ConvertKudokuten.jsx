@@ -19,12 +19,13 @@ function ConvertKudokuten() {
   };
 
   useEffect(() => {
+    convertKudokuten();
     console.log(sentence);
   }, [sentence]);
 
   return (
     <main className="convert">
-      <h2>句読点変換</h2>
+      <h2>文章を入力してください</h2>
       <button onClick={convertKudokuten}>変換</button>
       <div className="convert-area">
         <div className="before-convert">
