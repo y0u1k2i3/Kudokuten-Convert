@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   base: '/Kudokuten/', /* 追加 */
   server: {
-    open: '/',
+    // open: '/',  // サーバー起動時にブラウザを開く
+    open: false, // ブラウザを自動で開かない
     port: 5173,
     strictPort: true,
   },

@@ -1,27 +1,50 @@
 .convert {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
 }
 
 .convert-area {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap; /* ← レスポンシブ対応に重要 */
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.before-convert {
-    width: 40%;
-}
-
-#before-text {
-    width: 100%;
-    height: 500px;
-}
-
+.before-convert,
 .after-convert {
-    width: 40%;
+  flex: 1 1 45%; /* ← 幅を可変に */
+  min-width: 300px;
 }
 
+#before-text,
 #after-text {
+  width: 100%;
+  height: 700px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+/* ▼ スマホ・タブレット向け（画面幅768px以下） */
+@media screen and (max-width: 768px) {
+  .convert-area {
+    flex-direction: column;
+  }
+
+  .before-convert,
+  .after-convert {
     width: 100%;
-    height: 500px;
+  }
+
+  #before-text,
+  #after-text {
+    height: 300px; /* モバイルで見やすい高さに調整 */
+  }
 }
