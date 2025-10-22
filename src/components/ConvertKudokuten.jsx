@@ -2,27 +2,36 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./convertkudokuten.css";
 
+// 環境変数からAPI URLを取得（フォールバックはローカル開発用）
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
 function ConvertKudokuten() {
   const [sentence, setSentence] = useState("");  // 入力された文章の状態管理
   const [convertedsentence, setConvertedSentence] = useState("");  // 変換後の文章の状態管理
   const [convertMode, setConvertMode] = useState("zenkaku");  // 変換モードの状態管理
 
-  const convertKudokuten = () => {
-    const fetch_convert = async () => {
-      const endpoint = convertMode;
-      const response = await axios.post(`http://127.0.0.1:8000/${endpoint}`, {
-        text: sentence,
-      });
-      const converted = response.data.converted;
-      setConvertedSentence(converted);
-    };
-    fetch_convert();
-  };
-
   useEffect(() => {
+    // 入力が空の場合は変換をスキップ
+    if (!sentence) {
+      setConvertedSentence("");
+      return;
+    }
+
+    const convertKudokuten = async () => {
+      try {
+        const response = await axios.post(`${API_URL}/${convertMode}`, {
+          text: sentence,
+        });
+        const converted = response.data.converted;
+        setConvertedSentence(converted);
+      } catch (error) {
+        console.error("変換エラー:", error);
+        setConvertedSentence("エラーが発生しました");
+      }
+    };
+
     convertKudokuten();
-    console.log(sentence);
-  }, [sentence]);
+  }, [sentence, convertMode]);  // sentenceとconvertModeの両方を監視
 
   return (
     <main className="convert">
