@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.local
 
 # Editor directories and files
 .vscode/*
@@ -27,3 +29,6 @@ dist-ssr
 __pycache__/
 *.py[cod]
 .venv/
+
+# delelop test
+docker_test2/
