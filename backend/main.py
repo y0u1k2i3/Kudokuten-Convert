@@ -1,6 +1,8 @@
+import logging
 import os
 
 from convert.convert import router as convert_router
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -9,14 +11,19 @@ app = FastAPI(
     description="全角・半角句読点を相互に変換するAPI",
     version="1.0.0",
 )  # インスタンスを作成
+load_dotenv()
 
 # CORS設定 - 本番環境用に制限
-allowed_origins = os.getenv("ALLOWED_ORIGINS")
+logging.basicConfig(level=logging.INFO)
+allowed_origins = os.environ.get("ALLOWED_ORIGINS")
+logging.info("ALLOWED_ORIGINS: %s", allowed_origins)
 
 if allowed_origins:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[origin.strip() for origin in allowed_origins.split(",") if origin.strip()],
+        allow_origins=[
+            origin.strip() for origin in allowed_origins.split(",") if origin.strip()
+        ],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

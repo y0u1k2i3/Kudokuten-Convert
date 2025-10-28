@@ -1,7 +1,7 @@
 [project]
 name = "kudokuten"
 version = "0.1.0"
-description = "Add your description here"
+description = "This toml is for the backend of kudokuten-convert."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -9,4 +9,5 @@ dependencies = [
     "pydantic>=2.11.4",
     "uvicorn>=0.34.2",
     "gunicorn>=22.0.0",
+    "python-dotenv>=1.2.1",
 ]
