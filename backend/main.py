@@ -11,12 +11,12 @@ app = FastAPI(
 )  # インスタンスを作成
 
 # CORS設定 - 本番環境用に制限
-allowed_origin = os.getenv("ALLOWED_ORIGIN")
+allowed_origins = os.getenv("ALLOWED_ORIGINS")
 
-if allowed_origin:
+if allowed_origins:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[allowed_origin.strip()],
+        allow_origins=[origin.strip() for origin in allowed_origins.split(",") if origin.strip()],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
