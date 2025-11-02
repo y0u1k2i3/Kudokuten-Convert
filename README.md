@@ -1,67 +1,43 @@
-# リアルタイム句読点変換ツール
+# リアルタイム句読点変換ツール (Kudokuten-Convert)
+
+[![Vercel](https://img.shields.io/badge/Deployment-Vercel-black?logo=vercel)](https://kudokuten-convert.vercel.app) [![Render](https://img.shields.io/badge/Deployment-Render-2bbc8a?logo=render)](RENDER_BACKEND_URL_HERE)
 
 ## 概要
 
-句読点をリアルタイムで変換する Web アプリケーションです。
-全角（、。）と半角（，．）の句読点を相互に変換できます。
+テキストエリア内の句読点（全角の「、。」と半角の「, .」）をリアルタイムで相互変換する Web アプリです。
+
+ライブデモ（フロントエンド）: https://kudokuten-convert.vercel.app
+
+## 主な機能
+
+- 全角/半角句読点の相互変換（リアルタイムプレビュー）
 
 ## 技術スタック
 
-- **フロントエンド**: React + Vite
-- **バックエンド**: FastAPI (Python)
-- **デプロイ**: Vercel (フロントエンド) + Render (バックエンド)
+- フロントエンド: React, Vite, JSX
+- バックエンド: Python, FastAPI, Uvicorn / Gunicorn
+- インフラ/デプロイ: Vercel (frontend), Render (backend), Docker
 
-## ローカル開発
+## ローカルで動かす（Docker を使ったデモ）
 
-### 前提条件
+### コンテナをビルド & 起動
 
-- Node.js 20 以上
-- Python 3.11 以上
-
-### フロントエンド
-
-```bash
-npm install
-npm run dev
+```sh
+cd docker
+docker compose up --build -d
 ```
 
-ブラウザで http://localhost:5173 を開く
+### ローカルホストで確認
 
-### バックエンド
+- フロント: http://localhost/
+- バック: http://localhost:8000/
 
-```bash
-cd api
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+### コンテナを停止
+
+```sh
+docker compose down
 ```
 
-API ドキュメント: http://localhost:8000/docs
+## 今後の追加機能
 
-## 環境変数
-
-### フロントエンド (Vercel)
-
-```
-VITE_API_URL=https://your-backend-app.onrender.com
-```
-
-### バックエンド (Render)
-
-```
-ALLOWED_ORIGINS=http://localhost:5173,https://your-app.vercel.app
-```
-
-## デプロイ
-
-### Vercel (フロントエンド)
-
-1. GitHub リポジトリと連携
-2. 環境変数 `VITE_API_URL` を設定
-3. 自動デプロイ
-
-### Render (バックエンド)
-
-- **Root Directory**: `api`
-- **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `gunicorn -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:$PORT --workers 2`
-- 環境変数 `ALLOWED_ORIGINS` を設定
+- クリップボードへのコピー、入力履歴の簡易管理
